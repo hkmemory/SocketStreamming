@@ -1,4 +1,4 @@
-package com.hkmemory.socketstreamming;
+package com.hkmemory.socketclient;
 
 import android.util.Log;
 
@@ -100,5 +100,10 @@ public class SocketUtility {
         SocketData.getDataOut().write((WriteScoketOBJ + "\r").getBytes("UTF-8"));
     }
 
+    public String receivedData() throws IOException {
+        String recvData = SocketData.get().readLine() + "\n";
+        Log.d(CommonData.logCatMobile, "Data: " + recvData);
+        return recvData;
+    }
 
 }
