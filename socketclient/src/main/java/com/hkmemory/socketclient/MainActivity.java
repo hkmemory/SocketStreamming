@@ -2,16 +2,29 @@ package com.hkmemory.socketclient;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
 
 public class MainActivity extends ActionBarActivity {
-
+    private SocketUtility socketUtilityOBJ = new SocketUtility();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            socketUtilityOBJ.Connect();
+            while (true) {
+                //TODO The place that you handle data received.
+                String returnresult = socketUtilityOBJ.receivedData();
+                Log.d(CommonData.logCatMobile, "Data Received:" + returnresult);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -34,5 +47,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onDestroy() {
+        socketUtilityOBJ.Disconnect();
     }
 }

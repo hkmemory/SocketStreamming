@@ -2,11 +2,14 @@ package com.hkmemory.socketclient;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -68,6 +71,10 @@ public class SocketUtility {
             SocketAddress sc_add = new InetSocketAddress(serverAddr, SocketData.getServerPort());
             SocketData.getSocketObj().connect(sc_add, SocketData.getSocketTimeout());
             SocketData.setOutStream(SocketData.getSocketObj().getOutputStream());
+            SocketData.setInStream(SocketData.getSocketObj().getInputStream());
+            SocketData.setDataIn(new DataInputStream(SocketData.getSocketObj().getInputStream()));
+            SocketData.setInStreamReader(new InputStreamReader(SocketData.getDataIn()));
+            SocketData.setBr(new BufferedReader(SocketData.getInStreamReader()));
             SocketData.setDataOut(new DataOutputStream(SocketData.getSocketObj().getOutputStream()));
 
             Log.d(CommonData.logCatMobile, "Socket Running");
@@ -101,7 +108,7 @@ public class SocketUtility {
     }
 
     public String receivedData() throws IOException {
-        String recvData = SocketData.get().readLine() + "\n";
+        String recvData = SocketData.getBr().readLine() + "\n";
         Log.d(CommonData.logCatMobile, "Data: " + recvData);
         return recvData;
     }

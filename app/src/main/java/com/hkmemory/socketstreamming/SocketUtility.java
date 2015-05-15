@@ -68,6 +68,7 @@ public class SocketUtility {
             SocketAddress sc_add = new InetSocketAddress(serverAddr, SocketData.getServerPort());
             SocketData.getSocketObj().connect(sc_add, SocketData.getSocketTimeout());
             SocketData.setOutStream(SocketData.getSocketObj().getOutputStream());
+
             SocketData.setDataOut(new DataOutputStream(SocketData.getSocketObj().getOutputStream()));
 
             Log.d(CommonData.logCatMobile, "Socket Running");

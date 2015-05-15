@@ -1,7 +1,10 @@
 package com.hkmemory.socketclient;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
@@ -17,6 +20,37 @@ class SocketData implements Serializable {
     private static DataOutputStream DataOut;
     private static int SocketTimeout;
     private static BufferedReader br;
+    private static InputStream InStream;
+    private static DataInputStream DataIn;
+    private static InputStreamReader InStreamReader;
+
+    public static InputStreamReader getInStreamReader() {
+        return InStreamReader;
+    }
+
+    public static void setInStreamReader(InputStreamReader inStreamReader) {
+        InStreamReader = inStreamReader;
+    }
+
+
+    public static InputStream getInStream() {
+        return InStream;
+    }
+
+    public static void setInStream(InputStream inStream) {
+        InStream = inStream;
+    }
+
+
+    public static DataInputStream getDataIn() {
+        return DataIn;
+    }
+
+    public static void setDataIn(DataInputStream dataIn) {
+        DataIn = dataIn;
+    }
+
+
 
     public static BufferedReader getBr() {
         return br;
